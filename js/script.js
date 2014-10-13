@@ -8,7 +8,7 @@
 */ 
 
 function addition() {
-	// your code goes here!
+	alert(Number(document.getElementById('additionInput1').value) + Number(document.getElementById('additionInput2').value));
 }
 
 /* --------------------------------------------------------- */
@@ -28,7 +28,21 @@ function addition() {
 */ 
 
 function vowelCounter() {
-	// your code goes here!
+	var vowels = 0;
+	var idx;
+	var phrase = document.getElementById('vowelInput').value;
+	for (idx = 0; idx < phrase.length; idx++) {
+		if (phrase.charAt(idx) == 'a' || phrase.charAt(idx) == 'e' || phrase.charAt(idx) == 'i' || phrase.charAt(idx) == 'o' || phrase.charAt(idx) == 'u') {
+			vowels++;
+		} 
+	}
+	if (vowels == 0) {
+		alert('That sentence has no vowels in it.');
+	} else if (vowels == 1) {
+		alert('That sentence has 1 vowel in it.');
+	} else {
+		alert('That sentence has ' + vowels +' vowels in it.');
+	}
 }
 
 /* --------------------------------------------------------- */
@@ -59,18 +73,32 @@ function vowelCounter() {
 */ 
 
 function submit() {
-	
+	var guess = Number(document.getElementById('numberGuess').value);
+	var msgElem = document.getElementById('numberResult');
+	if (guess < num) {
+		msgElem.innerHTML = 'Higher.';
+		guesses++;
+	} else if (guess > num) {
+		msgElem.innerHTML = 'Lower.';
+		guesses++;
+	} else if (guess == num) {
+		guesses++;
+		msgElem.innerHTML = 'CORRECT! You got it in '+guesses+' guesses!';
+	}
 }
 
 function reset() {
-
+	num = Math.floor(Math.random()*101);
+	guesses = 0;
 }
 
 
 /* click handlers */
 document.addEventListener('DOMContentLoaded', function() {
+	reset();
 	document.getElementById('additionButton').addEventListener('click', addition);
 	document.getElementById('vowelButton').addEventListener('click', vowelCounter);
 	document.getElementById('numberSubmit').addEventListener('click', submit);
 	document.getElementById('numberReset').addEventListener('click', reset);
 });
+
